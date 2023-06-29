@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Image Gallery</title>
+    <title>Chart Gallery</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Image Gallery</h1>
-    {% for image_url in image_urls %}
-        <img src="{{ image_url }}" alt="Image">
-    {% endfor %}
+    <h1>Chart Gallery</h1>
+    <div class="square">
+        {% set counter = 0 %}
+        {% for image_url in image_urls %}
+            {% if index != 0 %}
+            {%set extensions = ('.jpg', '.jpeg', '.png', '.gif', '.bmp') %}
+                {% if image_url|lower| ends_with (extensions) %}  
+                    <img src="{{ image_url }}" alt="Image">
+                {% endif %}
+            {% endif %}
+            {% set counter = counter + 1 %}
+        {% endfor %}
+    </div>
 </body>
 </html>
